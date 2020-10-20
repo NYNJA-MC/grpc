@@ -4,4 +4,4 @@
   {modules, []},
   {registered, []},
   {env, []},
-  {applications, [kernel, stdlib, gpb, cowboy]}]}.
+  {applications, [kernel, stdlib, gpb, cowboy, grpc_lib]}]}.
