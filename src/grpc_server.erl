@@ -141,12 +141,15 @@ authenticate(Stream, #{auth_fun := AuthFun}) when is_function(AuthFun, 1) ->
 authenticated(#{cowboy_req := Req} = Stream, Options) ->
     %% invoke the rpc (= function) for the service (= module).
     try
+        ?LOG_INFO("gRPC get: ~p", [Req]),
         get_function(Req, Options, Stream)
     of
         NewStream ->
             read_frames(NewStream)
     catch
-        _:_ ->
+        _E:_R:_S ->
+            ?LOG_INFO("gRPC unimplemented: ~p ~p", [Options, Stream]),
+            ?LOG_INFO("gRPC unimplemented: ~p ~p ~p", [_E, _R, _S]),
             throw({?GRPC_STATUS_UNIMPLEMENTED,
                   <<"Operation not implemented">>})
     end.
