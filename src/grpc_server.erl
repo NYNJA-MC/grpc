@@ -100,7 +100,7 @@ make_stream(#{headers := Headers,
                 scheme => Scheme,
                 path => Path,
                 method => Method,
-                headers => #{},
+                headers => #{<<"content-type">> => <<"application/grpc+proto">>},
                 trailers => #{},
                 metadata => #{}, %% metadata received from client
                 %% headers can be sent explicitly from the user code, for
